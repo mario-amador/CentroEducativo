@@ -1,0 +1,78 @@
+{% load static %} 
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Factura N° {{ factura.numero_factura }}</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .logo-container {
+            position: relative;
+        }
+        .background-square {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* Color del cuadrado de fondo */
+            opacity: 0.5; /* Opacidad del cuadrado de fondo */
+        }
+        .logo {
+            position: absolute;
+            top: 50px; /* Ajusta la posición vertical del logo */
+            left: 50px; /* Ajusta la posición horizontal del logo */
+            width: 150px; /* Ajusta el ancho del logo */
+            z-index: 1; /* Coloca el logo en la parte superior */
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        th.header {
+            background-color: #e6f7ff; /* Cambia el color a tu preferencia */
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+    </style>
+</head>
+<body>
+    <img src="static/base/img/logofact.png" alt="Logo de la empresa" class="logo">
+    <h1>Factura N° {{ factura.numero_factura }}</h1>
+    <p>Empresa: {{ factura.CentroEducativo }}</p>
+    <p>Fecha de Emisión: {{ factura.fecha_emision }}</p>
+    <p>CAI: {{ factura.ParametrosSAR.CAI }}</p>
+    <p>RTN: {{ factura.ParametrosSAR.RTN }}</p>
+    <p>Rango Inicial: {{ factura.ParametrosSAR.RangoInicial }} , Rango Final: {{ factura.ParametrosSAR.RangoFinal }}</p>
+    <p></p>
+    
+    <h2>Detalle de Pago</h2>
+    <table>
+        <tr>
+            <th class="header">Pago</th>
+            <th class="header">Tutor</th>
+            <th class="header">Alumno</th>
+            <th class="header">Fecha y Hora</th>
+            <th class="header">Tipo de Pago</th>
+            <th class="header">Monto</th>
+            <th class="header">Mes</th>
+        </tr>
+        <tr>
+            <td>{{ factura.pago.id }}</td>
+            <td>{{ factura.pago.Tutor.Tutor }}</td>
+            <td>{{ factura.pago.Alumno.Alumno }}</td>
+            <td>{{ factura.pago.FechaHoraPago }}</td>
+            <td>{{ factura.pago.TipoPago }}</td>
+            <td>{{ factura.pago.TipoPago.monto }}</td>
+            <td>{{ factura.pago.Meses }}</td>
+        </tr>
+    </table>
+</body>
+</html>
